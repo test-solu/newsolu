@@ -14,4 +14,12 @@ public class DakController {
 		mav.setViewName(address);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/main")
+	public ModelAndView main() throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String address = "dak/main";
+		mav.setViewName(address);
+		return mav;
+	}
 }
