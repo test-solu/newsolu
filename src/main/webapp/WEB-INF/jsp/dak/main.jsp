@@ -8,10 +8,11 @@
 	<meta name="viewport">
 	<title>솔루티온 뉴스레터</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="resources/css/style.css">
     
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="click.js"></script>
+    <script type="text/javascript" src="resources/js/click.js"></script>
+    <script type="text/javascript" src="resources/js/main.js"></script>
 
     <script>
     jQuery(function($) {
@@ -84,7 +85,7 @@
         <div class="header-top">
             <div class="container">
                 <div class="date">2021년 8월 31일 화요일</div>
-                <div class="logo"><img src="img/logo.png"/></div>
+                <div class="logo"><img src="resources/img/logo.png"/></div>
             </div>
         </div>
         <div class="header-nav">
@@ -515,11 +516,11 @@
                     <h3 class="pc">Tip 1.<br>공유하고 더 슬기로운 마케터 되기</h3>
                     <h3 class="m">Tip 1.<br>공유하고 더 슬기로운<br>마케터 되기</h3>
                     <ul class="share_but">
-                        <li><img src="img/kakaotalk.png"/></li>
-                        <li><img src="img/facebook.png"/></li>
-                        <li><img src="img/instagram.png"/></li>
-                        <li><img src="img/blog.png"/></li>
-                        <li><img src="img/twitter.png"/></li>
+                        <li><img src="resources/img/kakaotalk.png"/></li>
+                        <li><img src="resources/img/facebook.png"/></li>
+                        <li><img src="resources/img/instagram.png"/></li>
+                        <li><img src="resources/img/blog.png"/></li>
+                        <li><img src="resources/img/twitter.png"/></li>
                     </ul>
                 </div>
             </div>
@@ -534,7 +535,7 @@
                     <div class="subscribe_inner">
                     <div class="guide">수신 메일 주소</div>
                     <div class="subscribe_email"><input class="keyword" type="text" name="subscribe" value="" placeholder="메일 주소를 입력하세요"/></div>
-                    <div class="subscribe_but">구독하기</div> 
+                    <div class="subscribe_but" onclick="test()">구독하기</div>
                     </div>
                     
                 </div>
@@ -542,7 +543,7 @@
 
             <div id="footer-info">
                 <div class="container">
-                    <div class="logo"><img src="img/logo_w.png"/></div>
+                    <div class="logo"><img src="resources/img/logo_w.png"/></div>
                     <p>
                     본 메일은 주식회사 솔루티온에서 정보 및 홍보성 컨텐츠로 발송한 메일입니다. <br/>
                     메일 수신을 원치 않으시면 <span class="unsubscribe">수신거부</span>를 클릭하십시오. <br/>
