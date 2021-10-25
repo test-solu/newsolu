@@ -9,6 +9,7 @@
 	<title>솔루티온 뉴스레터</title>
 
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon">
     
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="resources/js/click.js"></script>
