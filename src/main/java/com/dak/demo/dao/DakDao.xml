@@ -9,6 +9,14 @@
         where   Keyword = '자동차'
         and     sGuid= '82D20500-CB2C-4B5D-95FC-E5B3161E4763'
     </select>
+    
+    <select id="getCategory" resultType="DakNaverBestDto">
+    	 select		seq
+    	 			,categorynm
+    	 from		CrawlData.dbo.C_NaverBest100_Head
+    	 where		ActiveYN = 'y' 
+    	 and		Gubun = 2
+    </select>
 
 
 </mapper>
