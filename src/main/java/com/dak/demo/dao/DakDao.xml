@@ -4,11 +4,10 @@
 <mapper namespace="com.dak.demo.dao.DakDao">
 
     <select id="getList" resultType="DakDto">
-        select  seq
-                ,keyword
+        select  Top 10 *
         from    CrawlData.dbo.NKT_List
-       /* where   Keyword = '자동차'
-        and     sGuid= '82D20500-CB2C-4B5D-95FC-E5B3161E4763'*/
+        where   Keyword = '자동차'
+        and     sGuid= '82D20500-CB2C-4B5D-95FC-E5B3161E4763'
     </select>
 
 

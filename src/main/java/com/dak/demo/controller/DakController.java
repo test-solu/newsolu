@@ -21,7 +21,8 @@ public class DakController {
 		ModelAndView mav = new ModelAndView();
 		String address = "dak/test";
 
-		logger.info("test : " + service.getList());
+		//logger.info("test : " + service.getList());
+		mav.addObject("nkt_list",service.getList());
 
 		mav.setViewName(address);
 		return mav;
