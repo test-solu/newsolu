@@ -35,7 +35,7 @@ public class DakController {
 	}
 	
 	@RequestMapping(value = "/main")
-	public ModelAndView main() throws Exception{
+	public ModelAndView main(){
 		logger.info(" [ main ] ");
 		ModelAndView mav = new ModelAndView();
 		String address = "dak/main";

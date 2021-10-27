@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dak.demo.dao.DakDao">
+
+    <select id="getList" resultType="DakDto">
+        select  Top 10 *
+        from    CrawlData.dbo.NKT_List
+        where   Keyword = '자동차'
+        and     sGuid= '82D20500-CB2C-4B5D-95FC-E5B3161E4763'
+    </select>
+
+
+</mapper>
