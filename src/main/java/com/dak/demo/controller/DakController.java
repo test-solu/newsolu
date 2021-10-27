@@ -28,7 +28,7 @@ public class DakController {
 		String address = "dak/test";
 
 		//logger.info("test : " + service.getList());
-		mav.addObject("nkt_list",service.getList());
+		//mav.addObject("nkt_list",service.getList());
 
 		mav.setViewName(address);
 		return mav;
