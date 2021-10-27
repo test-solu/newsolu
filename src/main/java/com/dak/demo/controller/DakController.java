@@ -39,7 +39,8 @@ public class DakController {
 		logger.info(" [ main ] ");
 		ModelAndView mav = new ModelAndView();
 		String address = "dak/main";
-		ArrayList<DakNaverBestDto> cateList = service.getCategory();
+		ArrayList<DakNaverBestDto> cateList = new ArrayList<DakNaverBestDto>(); 
+		cateList = service.getCategory();
 		mav.addObject("cateList", cateList);
 		mav.addObject("cateList_leng", cateList.size());
 		

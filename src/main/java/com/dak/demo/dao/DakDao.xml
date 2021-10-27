@@ -23,6 +23,7 @@
     	 from		CrawlData.dbo.C_NaverBest100_FavoriteKwd
     	 where		F_Seq = #{data} 
     </select>
+    
 
 
 </mapper>
