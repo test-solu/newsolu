@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,11 @@
 
     <script>
         $(document).ready(function(){ 
+        	//$("#bon_0").attr("class", "on first-acate-top");
+        	
+        	
             $(".first-acate-top").click(function(){
+            	
                 var submenua = $(".first-acate-open");
                 submenua.css(":visible");
                 submenua.slideDown();
@@ -61,6 +66,9 @@
                 submenuf.css(":visible");
                 submenuf.slideDown();
             });
+            
+            //alert($(".first-acate-top").text());
+            
         });
 
 
@@ -73,6 +81,82 @@
     //         $( '.showHideon' ).slideDown();
     //         } );
     //     } );
+    
+    /* =============== 클릭 이벤트 선택한 li 확인 하기 () =============== */
+    function click_me(seq,end,f_seq){
+    	for(var i = 0; i < end; i++){
+    		$("#bon_"+i).attr("class", "");
+    		if(i == seq){
+    			$("#bon_"+i).attr("class", "on first-acate-top");
+    		}
+    	}
+    			click_t(f_seq);
+    }
+    
+    function click_t(seq){
+    	var li_mem = "";
+    	$.ajax({
+    		type		:	"POST",
+    		url			:	"/getNewBest",
+    		data		:	{f_seq:seq},
+    		dataType	:	"json",
+    		success		:	function(data){
+    			for(var i=0; i<data.length; i++){
+    				li_mem	+=	"<li id='btw_"+i+"' onclick='getextended("+i+","+data.length+")' >" + data[i].keyword + "</li>"
+    			}
+    			$("#showHidetw").html(li_mem);
+    		},error		:	function(e){
+    			alert(e);
+    		}
+    	});
+        var submenua = $(".first-acate-open");
+        submenua.css(":visible");
+        submenua.slideDown();	
+    }
+    function getextended(seq,end){
+    	for(var i = 0; i < end; i++){
+    		$("#btw_"+i).attr("class", "");
+    		if(i == seq){
+    			$("#btw_"+i).attr("class", "on sec-acate-top");
+    		}
+    	}
+    	click_extended($("#btw_"+seq).text());
+    }
+    
+    function click_extended(nk){
+    	var li_extended = "";
+    	$.ajax({
+    		type		:	"GET",
+    		url			:	"/getExtended",
+    		data		:	{keyword:nk},
+    		dataType	:	"json",
+    		success		:	function(data){
+    			var keylist = data.keywordList;
+    			for(var i=0; i<keylist.length; i++){
+    				li_extended	+= "<li id='bth_"+i+"' onclick='getMyPrice("+i+","+keylist.length+")' >" + keylist[i].relKeyword + "</li>";
+    			}
+    			$("#showHideth").html(li_extended);
+    		},error		:	function(e){
+    			alert(e);
+    		}
+    	});
+    	var submenub = $(".sec-acate-open");
+        submenub.css(":visible");
+        submenub.slideDown();
+    }
+    
+    function getMyPrice(seq,end){
+    	
+    	for(var i = 0; i < end; i++){
+    		$("#btw_"+i).attr("class", "");
+    		if(i == seq){
+    			$("#btw_"+i).attr("class", "on sec-acate-top");
+    		}
+    	}
+    	alert("test");
+    }
+    
+    
 
     </script>
 
@@ -119,7 +203,10 @@
                         <h5>카테고리</h5>
                         <button id="aon" class="cate-but"></button>
                         <ul id="showHideon" class="click">
-                            <li id="bon" class="on first-acate-top">패션의류</li>
+                        	<c:forEach items="${cateList }" var="cate" varStatus="cnt">
+                        		<li id="bon_${cnt.index}" onclick="click_me(${cnt.index},${cateList_leng },${cate.seq })" >${cate.categorynm }</li>
+                        	</c:forEach>
+                            <!-- <li id="bon" class="on first-acate-top">패션의류</li>
                             <li>패션잡화</li>
                             <li>화장품/미용</li>
                             <li> 디지털/가전</li>
@@ -127,14 +214,14 @@
                             <li> 식품</li>
                             <li> 스포츠/레저</li>
                             <li> 출산/육아</li>
-                            <li>생활/건강</li>
+                            <li>생활/건강</li> -->
                         </ul>
                     </div>
                     <div class="sub_inner per15">
                         <h5>신규 인기검색어</h5>
                         <button id="atw" class="cate-but"></button>
                         <ul id="showHidetw" class="click sub-open-on first-acate-open">
-                            <li>써스데이아일랜드원피스</li>
+                            <!-- <li>써스데이아일랜드원피스</li>
                             <li id="btw" class="on sec-acate-top">블라우스</li>
                             <li>여름원피스</li>
                             <li>쥬시쥬디</li>
@@ -153,14 +240,14 @@
                             <li>여성반바지</li>
                             <li>랩원피스</li>
                             <li>시슬리원피스</li>
-                            <li>바스락원피스</li>                                
+                            <li>바스락원피스</li> -->                                
                         </ul>
                     </div>
                     <div class="sub_inner per15">
                         <h5>확장키워드</h5>
                         <button id="ath" class="cate-but"></button>
                         <ul id="showHideth" class="click sub-open-tw sec-acate-open">
-                            <li>	블라우스	</li>
+                           <!--  <li>	블라우스	</li>
                             <li>	검정블라우스	</li>
                             <li>	남색블라우스	</li>
                             <li>	레드블라우스	</li>
@@ -209,13 +296,13 @@
                             <li>	랩블라우스	</li>
                             <li>	헤지스블라우스	</li>
                             <li>	버버리블라우스	</li>
-                            <li>	더틸버리블라우스	</li>                                                          
+                            <li>	더틸버리블라우스	</li>  -->                                                         
                         </ul>
                     </div>
                     <div class="sub_inner per30">
                         <h5>바로 보는 순위별 입찰가</h5>
 
-                        <div id="showHideth" class="sub-open-th third-acate-open mb45" style="margin: 0 auto;">
+                        <div id="showHideth_1" class="sub-open-th third-acate-open mb45" style="margin: 0 auto;">
                             <table class="tg">
                                 <thead>
                                     <tr> <th class="th_inner" colspan="2">PC</th> </tr>
@@ -639,12 +726,13 @@ pointStyle: 'circle'
 }
 });
 
-$('li').on('click', function() {
-  $(this).prependTo($(this).parent())
+/* $('li').on('click', function() {
+  $(this).prependTo($(this).parent());
   $(this).parent().animate({
     scrollTop: 0
-  })
-})
+  }) 
+  
+}) */
  
 </script>
 

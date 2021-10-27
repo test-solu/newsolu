@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface DakDao {
     public ArrayList<DakDto> getList();
     public ArrayList<DakNaverBestDto> getCategory();
+    public ArrayList<DakNaverBestDto> getNewBest(int seq);
 }

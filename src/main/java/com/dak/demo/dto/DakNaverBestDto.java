@@ -10,6 +10,6 @@ public class DakNaverBestDto {
 	
 	private int seq;
 	private String categorynm;
-	
+	private String keyword;
 
 }
