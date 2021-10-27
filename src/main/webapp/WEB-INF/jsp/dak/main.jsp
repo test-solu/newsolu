@@ -148,12 +148,12 @@
     function getMyPrice(seq,end){
     	
     	for(var i = 0; i < end; i++){
-    		$("#btw_"+i).attr("class", "");
+    		$("#bth_"+i).attr("class", "");
     		if(i == seq){
-    			$("#btw_"+i).attr("class", "on sec-acate-top");
+    			$("#bth_"+i).attr("class", "on third-acate-top");
     		}
     	}
-    	alert("test");
+    	//alert("test");
     }
     
     
