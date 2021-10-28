@@ -137,6 +137,7 @@
     				li_extended	+= "<li id='bth_"+i+"' onclick='getMyPrice("+i+","+keylist.length+")' >" + keylist[i].relKeyword + "</li>";
     			}
     			$("#showHideth").html(li_extended);
+    			//console.log(li_extended);
     		},error		:	function(e){
     			alert(e.statusText);
     		}

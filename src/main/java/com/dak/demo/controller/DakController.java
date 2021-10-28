@@ -1,5 +1,6 @@
 package com.dak.demo.controller;
 
+import com.dak.demo.dto.DakDto;
 import com.dak.demo.dto.DakNaverBestDto;
 import com.dak.demo.service.DakMainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class DakController {
 		return mav;
 	}
 	
+	
+	/**
+	 * ModelAndView
+	 * jeff
+	 * 기능 설명 : 메일페이지 호출(첫 li 카테고리 호출)
+	 */
 	@RequestMapping(value = "/main")
 	public ModelAndView main(){
 		logger.info(" [ main ] ");
@@ -48,6 +55,11 @@ public class DakController {
 		return mav;
 	}
 	
+	/**
+	 * ArrayList<DakNaverBestDto>
+	 * jeff
+	 * 기능 설명 : 신규 인기 검색어 호출
+	 */
 	@RequestMapping(value = "/getNewBest")
 	@ResponseBody
 	public ArrayList<DakNaverBestDto> getNewBest(@RequestParam(value = "f_seq")int f_seq){
@@ -63,6 +75,11 @@ public class DakController {
 		return newblist;
 	}
 	
+	/**
+	 * String
+	 * jeff
+	 * 기능 설명 : 확장 키워드 호출
+	 */
 	@RequestMapping(value = "/getExtended")
 	@ResponseBody
 	public String getExtended(@RequestParam(value = "keyword")String keyword){
@@ -77,6 +94,11 @@ public class DakController {
 		return result;
 	}
 	
+	/**
+	 * String
+	 * jeff
+	 * 기능 설명 : 디바이스별 검색어 순위 가격 확인 
+	 */
 	@RequestMapping(value = "/getMyprice")
 	@ResponseBody
 	public String getMyprice(@RequestParam(value = "keyword")String keyword){
@@ -98,15 +120,22 @@ public class DakController {
 		return result.toString();
 	}
 	
+	/**
+	 * ArrayList<DakDto>
+	 * jeff
+	 * 기능 설명 : 검색 한 키워드 db 저장 및 재호출
+	 */
 	@RequestMapping(value = "/check_my_keyword")
 	@ResponseBody
-	public String check_my_keyword(@RequestParam(value = "keyword")String keyword){
-		logger.info(" [ check_my_keyword ] ");
+	public ArrayList<DakDto> check_my_keyword(@RequestParam(value = "keyword")String keyword){
+		logger.info(" [ check_my_keyword ] " + keyword);
+		ArrayList<DakDto> result = new ArrayList<>();
 		Thread th = new Thread();
-		String result = "test";
 		try {
 			logger.info("test >>> thread");
+			service.insert_my_keyword(keyword);
 			th.sleep(15000);
+			result = service.getList(keyword);
 			logger.info("test >>> asdfasdfasdfasdf");
 		} catch (Exception e) {
 			// TODO: handle exception

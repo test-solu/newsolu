@@ -32,8 +32,8 @@ public class DakMainServiceImpl implements DakMainService{
     DakDao dao;
 
     @Override
-    public ArrayList<DakDto> getList() {
-        return dao.getList();
+    public ArrayList<DakDto> getList(String keyword) {
+        return dao.getList(keyword);
     }
 
 	@Override
@@ -110,42 +110,11 @@ public class DakMainServiceImpl implements DakMainService{
 		return result;
 	}
 
-//	@Override
-//	public String getMyprice_mobile(String keyword) {
-//		logger.info(" [ getMyprice_mobile : service ] ");
-//		String reqURL = "http://sqldb.solu-tion.co.kr:8080/naver/Estimate/average/1018467/keyword";
-//		String result = "";
-//		
-//		try {
-//			HttpPost post = new HttpPost(reqURL);
-//			StringBuilder json = new StringBuilder();
-//			ArrayList<StringBuilder> list = new ArrayList<StringBuilder>();
-//			for (int i = 1; i < 6; i++) {
-//				StringBuilder in_json = new StringBuilder();
-//				in_json.append("{");
-//				in_json.append("\"key\":\""+keyword+"\",");
-//				in_json.append("\"position\":\""+i+"\"");
-//				in_json.append("}");
-//				list.add(in_json);
-//			}
-//			json.append("{");
-//			json.append("\"device\":\"MOBILE\",");
-//			json.append("\"items\":" + list);
-//			json.append("}");
-//			//logger.info(json.toString());
-//			post.setEntity(new StringEntity(json.toString(), "UTF-8"));
-//			CloseableHttpClient httpClient = HttpClients.createDefault();
-//			CloseableHttpResponse response = httpClient.execute(post);
-//			result = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
-//			response.close();
-//			httpClient.close();
-//		} catch (Exception e) {
-//			result += e.getMessage();
-//		}
-//		
-//		return result;
-//	}
-	
+	@Override
+	public void insert_my_keyword(String keyword) {
+		dao.insert_my_keyword(keyword);
+	}
+
 	
 	
 	

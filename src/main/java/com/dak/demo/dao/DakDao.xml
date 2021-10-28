@@ -3,11 +3,10 @@
 
 <mapper namespace="com.dak.demo.dao.DakDao">
 
-    <select id="getList" resultType="DakDto">
+    <select id="getList" parameterType="String" resultType="DakDto">
         select  Top 10 *
         from    CrawlData.dbo.NKT_List
-        where   Keyword = '자동차'
-        and     sGuid= '82D20500-CB2C-4B5D-95FC-E5B3161E4763'
+        where   Keyword = #{data}
     </select>
     
     <select id="getCategory" resultType="DakNaverBestDto">
@@ -23,6 +22,17 @@
     	 from		CrawlData.dbo.C_NaverBest100_FavoriteKwd
     	 where		F_Seq = #{data} 
     </select>
+    
+    <insert id="insert_my_keyword" parameterType="String">
+    	insert		
+    	into	CrawlData.dbo.NKT_List
+				(
+				Keyword
+				)
+		values	(
+				#{data}
+				)
+    </insert>
     
 
 

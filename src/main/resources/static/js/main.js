@@ -2,14 +2,12 @@
 
 	function check_my_keyword() {
 		$(".sub-open-fo").hide();
-		
-		
 		var mk = $("#check_mk").val();
 		$.ajax({
     		type		:	"GET",
     		url			:	"/check_my_keyword",
     		data		:	{keyword:mk},
-    		dataType	:	"text",
+    		dataType	:	"json",
     		success		:	function(data){
 				let_write_mykey(data,mk);
     		},error		:	function(e){
@@ -19,9 +17,6 @@
 	}
 	
 	function let_write_mykey(data,mk){
-		console.log(data);
-		console.log(mk);
-		
 		var li_extended = "";
     	$.ajax({
     		type		:	"GET",
@@ -38,7 +33,50 @@
     			alert(e.statusText);
     		}
     	});
-		
+		make_key_Competitiveness(data);
+	}
+	
+	function check_mk_extended(seq,end){
+    	for(var i = 0; i < end; i++){
+    		$("#bfo_"+i).attr("class", "");
+    		if(i == seq){
+    			$("#bfo_"+i).attr("class", "on five-acate-top");
+    		}
+    	}
+    	check_mk_price($("#bfo_"+seq).text());
+    }
+	
+	function check_mk_price(mykey){
+    	var my_price = "";
+    	var my_price_m = "";
+    	$.ajax({
+    		type		:	"GET",
+    		url			:	"/getMyprice",
+    		data		:	{keyword:mykey},
+    		dataType	:	"json",
+    		success		:	function(data){
+    			var pc_bi = data.pc.estimate;
+    			var mo_bi = data.Mobile.estimate
+    			for(var i=0; i<pc_bi.length; i++){
+    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    			}
+    			for(var j=0; j<mo_bi.length; j++){
+    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    			}
+    			$("#td_inner_check").html(my_price);
+    			$("#td_inner_check_m").html(my_price_m);
+    		},error		:	function(e){
+    			console.log(e.statusText);
+    		}
+    	});
+    	var submenuf = $(".five-acate-open");
+        submenuf.css(":visible");
+        submenuf.slideDown();
+    }
+    
+    function make_key_Competitiveness(data){
+		var my_key = data[0];
+		console.log(my_key);
 		var ctx = document.getElementById('chart').getContext('2d');
 		new Chart(ctx, {
 		type: 'line',
@@ -112,42 +150,3 @@
         submenud.css(":visible");
         submenud.slideDown();
 	}
-	
-	function check_mk_extended(seq,end){
-    	
-    	for(var i = 0; i < end; i++){
-    		$("#bfo_"+i).attr("class", "");
-    		if(i == seq){
-    			$("#bfo_"+i).attr("class", "on five-acate-top");
-    		}
-    	}
-    	check_mk_price($("#bfo_"+seq).text());
-    }
-	
-	function check_mk_price(mykey){
-    	var my_price = "";
-    	var my_price_m = "";
-    	$.ajax({
-    		type		:	"GET",
-    		url			:	"/getMyprice",
-    		data		:	{keyword:mykey},
-    		dataType	:	"json",
-    		success		:	function(data){
-    			var pc_bi = data.pc.estimate;
-    			var mo_bi = data.Mobile.estimate
-    			for(var i=0; i<pc_bi.length; i++){
-    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
-    			}
-    			for(var j=0; j<mo_bi.length; j++){
-    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
-    			}
-    			$("#td_inner_check").html(my_price);
-    			$("#td_inner_check_m").html(my_price_m);
-    		},error		:	function(e){
-    			console.log(e.statusText);
-    		}
-    	});
-    	var submenuf = $(".five-acate-open");
-        submenuf.css(":visible");
-        submenuf.slideDown();
-    }
