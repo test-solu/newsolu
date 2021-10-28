@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon">
     
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="resources/js/click.js"></script>
     <script type="text/javascript" src="resources/js/main.js"></script>
@@ -40,8 +42,7 @@
         	//$("#bon_0").attr("class", "on first-acate-top");
         	
         	
-            $(".first-acate-top").click(function(){
-            	
+           /*  $(".first-acate-top").click(function(){
                 var submenua = $(".first-acate-open");
                 submenua.css(":visible");
                 submenua.slideDown();
@@ -55,17 +56,17 @@
                 var submenuc = $(".third-acate-open");
                 submenuc.css(":visible");
                 submenuc.slideDown();
-            });
-            $(".four-acate-top").click(function(){
+            }); */
+            /* $(".four-acate-top").click(function(){
                 var submenud = $(".four-acate-open");
                 submenud.css(":visible");
                 submenud.slideDown();
-            });
-            $(".five-acate-top").click(function(){
+            }); */
+          /*   $(".five-acate-top").click(function(){
                 var submenuf = $(".five-acate-open");
                 submenuf.css(":visible");
                 submenuf.slideDown();
-            });
+            }); */
             
             //alert($(".first-acate-top").text());
             
@@ -106,7 +107,7 @@
     			}
     			$("#showHidetw").html(li_mem);
     		},error		:	function(e){
-    			alert(e);
+    			alert(e.statusText);
     		}
     	});
         var submenua = $(".first-acate-open");
@@ -137,7 +138,7 @@
     			}
     			$("#showHideth").html(li_extended);
     		},error		:	function(e){
-    			alert(e);
+    			alert(e.statusText);
     		}
     	});
     	var submenub = $(".sec-acate-open");
@@ -153,9 +154,36 @@
     			$("#bth_"+i).attr("class", "on third-acate-top");
     		}
     	}
-    	//alert("test");
+    	click_myprice($("#bth_"+seq).text());
     }
     
+    function click_myprice(mykey){
+    	var my_price = "";
+    	var my_price_m = "";
+    	$.ajax({
+    		type		:	"GET",
+    		url			:	"/getMyprice",
+    		data		:	{keyword:mykey},
+    		dataType	:	"json",
+    		success		:	function(data){
+    			var pc_bi = data.pc.estimate;
+    			var mo_bi = data.Mobile.estimate
+    			for(var i=0; i<pc_bi.length; i++){
+    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    			}
+    			for(var j=0; j<mo_bi.length; j++){
+    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    			}
+    			$("#td_inner_prive").html(my_price);
+    			$("#td_inner_mprice").html(my_price_m);
+    		},error		:	function(e){
+    			console.log(e.statusText);
+    		}
+    	});
+    	var submenuc = $(".third-acate-open");
+        submenuc.css(":visible");
+        submenuc.slideDown();
+    }
     
 
     </script>
@@ -324,8 +352,8 @@
                                         </ul>
                                     </td>
                                     <td class="td_inner">
-                                        <ul>
-                                        <li>2,960원</li>
+                                        <ul id="td_inner_prive">
+                                        <!-- <li>2,960원</li>
                                         <li>1,900원</li>
                                         <li>1,550원</li>
                                         <li>1,330원</li>
@@ -334,7 +362,7 @@
                                         <li>990원</li>
                                         <li>950원</li>
                                         <li>910원</li>
-                                        <li>880원</li>
+                                        <li>880원</li> -->
                                         </ul>
                                     </td>
                                 </tr>
@@ -357,12 +385,12 @@
                                         </ul>
                                     </td>
                                     <td class="td_inner">
-                                        <ul>
-                                        <li>1,810원</li>
+                                        <ul id="td_inner_mprice">
+                                       <!--  <li>1,810원</li>
                                         <li>1,330원</li>
                                         <li>1,170원</li>
                                         <li>70원</li>
-                                        <li>70원</li>
+                                        <li>70원</li> -->
                                         </ul>
                                     </td>
                                 </tr>
@@ -394,8 +422,8 @@
             <div class="sub_content">
                 <div class="container_but">
                     <div class="guide">검색어 인사이트</div>
-                    <div class="speech_balloon"><input class="keyword" type="text" name="search" maxlength="25" value="" placeholder="검색어를 입력하세요"/></div>
-                    <div class="button fw four-acate-top">분석하기</div>
+                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요"/></div>
+                    <div class="button fw four-acate-top" onclick="check_my_keyword()">분석하기</div>
                 </div>
                 <div class="container sec">
 
@@ -461,8 +489,8 @@
                         <div class="sub_inner flex">
                             <h5>확장키워드</h5>
                             <button id="afo" class="cate-but"></button>
-                            <ul id="showHidefo" class="click sub-open-fo four-acate-open">
-                                <li>	블라우스	</li>
+                            <ul id="showHidefo" class="click sub-open-fo four-acate-open" i>
+                                <!-- <li>	블라우스	</li>
                                 <li>	검정블라우스	</li>
                                 <li>	남색블라우스	</li>
                                 <li>	레드블라우스	</li>
@@ -511,7 +539,7 @@
                                 <li>	랩블라우스	</li>
                                 <li>	헤지스블라우스	</li>
                                 <li>	버버리블라우스	</li>
-                                <li>	더틸버리블라우스	</li>  
+                                <li>	더틸버리블라우스	</li>   -->
                             </ul>
                         </div>
                     </div>
@@ -520,7 +548,7 @@
                         <div class="sub_inner flex">
                         <h5>바로 보는 순위별 입찰가</h5>
  
-                            <div class="sub-open-fi five-acate-open mb45" style="margin: 0 auto;">
+                            <div class="sub-open-fi sub-open-fo five-acate-open mb45" style="margin: 0 auto;">
                                 <table class="tg">
                                     <thead>
                                         <tr> <th class="th_inner" colspan="2">PC</th> </tr>
@@ -542,8 +570,8 @@
                                             </ul>
                                         </td>
                                         <td class="td_inner">
-                                            <ul>
-                                                <li>2,960원</li>
+                                            <ul id="td_inner_check">
+                                               <!--  <li>2,960원</li>
                                                 <li>1,900원</li>
                                                 <li>1,550원</li>
                                                 <li>1,330원</li>
@@ -552,7 +580,7 @@
                                                 <li>990원</li>
                                                 <li>950원</li>
                                                 <li>910원</li>
-                                                <li>880원</li>
+                                                <li>880원</li> -->
                                             </ul>
                                         </td>
                                     </tr>
@@ -575,12 +603,12 @@
                                             </ul>
                                         </td>
                                         <td class="td_inner">
-                                            <ul>
-                                            <li>1,810원</li>
+                                            <ul id="td_inner_check_m">
+                                           <!--  <li>1,810원</li>
                                             <li>1,330원</li>
                                             <li>1,170원</li>
                                             <li>70원</li>
-                                            <li>70원</li>
+                                            <li>70원</li> -->
                                             </ul>
                                         </td>
                                     </tr>
@@ -650,89 +678,3 @@
 
 </body>
 </html>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-
-<script>
-    // Code goes here
-var ctx = document.getElementById('chart').getContext('2d');
-new Chart(ctx, {
-type: 'line',
-data: {
-labels: ['2021-08', '2021-07', '2021-06', '2021-05', '2021-04', '2021-03'],
-datasets: [{
-label: 'PC',
-yAxisID: 'A',
-borderColor: '#678184',
-backgroundColor: 'white',
-data: [8040, 9660 , 12000 , 10800 , 12800 , 12300],
-fill: false
-}, {
-label: 'Mobile',
-yAxisID: 'D',
-borderColor: '#2faebb',
-backgroundColor: 'white',
-data: [80400 , 106100 , 129700 , 124100 , 131100 , 136000 ],
-fill: false
-}]
-},
-options: {
-tooltips: {
-mode: 'nearest'
-},
-scales: {
-yAxes: [{
-id: 'A',
-type: 'linear',
-position: 'left',
-ticks: {
-min: 5000,
-max: 15000,
-stepSize: 2000,
-fontColor: '#678184',
-callback: function(value, index, values) {
-return value;
-}
-}
-}, {
-id: 'D',
-type: 'linear',
-position: 'right',
-ticks: {
-min: 50000,
-max: 150000,
-stepSize: 20000,
-fontColor: '#2faebb',
-callback: function(value, index, values) {
-return value;
-}
-},
-scaleLabel: {
-display: false
-},
-}]
-},
-elements: {
-line: {
-tension: 0, // disables bezier curves
-},
-point: {
-radius: 4,
-borderWidth: 2,
-pointStyle: 'circle'
-}
-}
-}
-});
-
-/* $('li').on('click', function() {
-  $(this).prependTo($(this).parent());
-  $(this).parent().animate({
-    scrollTop: 0
-  }) 
-  
-}) */
- 
-</script>
-

@@ -77,4 +77,42 @@ public class DakController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/getMyprice")
+	@ResponseBody
+	public String getMyprice(@RequestParam(value = "keyword")String keyword){
+		logger.info(" [ getMyprice ] ");
+		StringBuilder result = new StringBuilder();
+		String pc_result = "";
+		String mobile_result = "";
+		try {
+			pc_result = service.getMyprice(keyword,"PC");
+			mobile_result = service.getMyprice(keyword,"MOBILE");
+			result.append("{");
+			result.append("\"pc\":" + pc_result);
+			result.append(",\"Mobile\":" + mobile_result);
+			result.append("}");
+		} catch (Exception e) {
+			result.append(e.getMessage());
+		}
+		
+		return result.toString();
+	}
+	
+	@RequestMapping(value = "/check_my_keyword")
+	@ResponseBody
+	public String check_my_keyword(@RequestParam(value = "keyword")String keyword){
+		logger.info(" [ check_my_keyword ] ");
+		Thread th = new Thread();
+		String result = "test";
+		try {
+			logger.info("test >>> thread");
+			th.sleep(15000);
+			logger.info("test >>> asdfasdfasdfasdf");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return result;
+	}
+	
 }

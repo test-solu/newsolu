@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 //http 통신
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.HttpEntity;
@@ -18,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 @Service
@@ -63,6 +66,87 @@ public class DakMainServiceImpl implements DakMainService{
 		}
 		return result;
 	}
+
+	@Override
+	public String getMyprice(String keyword, String device) {
+		logger.info(" [ getMyprice : service ] ");
+		String reqURL = "http://sqldb.solu-tion.co.kr:8080/naver/Estimate/average/1018467/keyword";
+		String result = "";
+		int cnt = 0;
+		
+		if(device.equals("PC")) {
+			cnt = 11;
+		} else {
+			cnt = 6;
+		}
+		
+		try {
+			HttpPost post = new HttpPost(reqURL);
+			StringBuilder json = new StringBuilder();
+			ArrayList<StringBuilder> list = new ArrayList<StringBuilder>();
+			for (int i = 1; i < cnt; i++) {
+				StringBuilder in_json = new StringBuilder();
+				in_json.append("{");
+				in_json.append("\"key\":\""+keyword+"\",");
+				in_json.append("\"position\":\""+i+"\"");
+				in_json.append("}");
+				list.add(in_json);
+			}
+			json.append("{");
+			json.append("\"device\":\""+device+"\",");
+			json.append("\"items\":" + list);
+			json.append("}");
+			//logger.info(json.toString());
+			post.setEntity(new StringEntity(json.toString(), "UTF-8"));
+			CloseableHttpClient httpClient = HttpClients.createDefault();
+			CloseableHttpResponse response = httpClient.execute(post);
+			result = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+			response.close();
+			httpClient.close();
+		} catch (Exception e) {
+			result += e.getMessage();
+		}
+		
+		return result;
+	}
+
+//	@Override
+//	public String getMyprice_mobile(String keyword) {
+//		logger.info(" [ getMyprice_mobile : service ] ");
+//		String reqURL = "http://sqldb.solu-tion.co.kr:8080/naver/Estimate/average/1018467/keyword";
+//		String result = "";
+//		
+//		try {
+//			HttpPost post = new HttpPost(reqURL);
+//			StringBuilder json = new StringBuilder();
+//			ArrayList<StringBuilder> list = new ArrayList<StringBuilder>();
+//			for (int i = 1; i < 6; i++) {
+//				StringBuilder in_json = new StringBuilder();
+//				in_json.append("{");
+//				in_json.append("\"key\":\""+keyword+"\",");
+//				in_json.append("\"position\":\""+i+"\"");
+//				in_json.append("}");
+//				list.add(in_json);
+//			}
+//			json.append("{");
+//			json.append("\"device\":\"MOBILE\",");
+//			json.append("\"items\":" + list);
+//			json.append("}");
+//			//logger.info(json.toString());
+//			post.setEntity(new StringEntity(json.toString(), "UTF-8"));
+//			CloseableHttpClient httpClient = HttpClients.createDefault();
+//			CloseableHttpResponse response = httpClient.execute(post);
+//			result = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+//			response.close();
+//			httpClient.close();
+//		} catch (Exception e) {
+//			result += e.getMessage();
+//		}
+//		
+//		return result;
+//	}
+	
+	
 	
 	
 	

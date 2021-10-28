@@ -10,4 +10,6 @@ public interface DakMainService {
     public ArrayList<DakNaverBestDto> getCategory();
     public ArrayList<DakNaverBestDto> getNewBest(int seq);
     public String getExtended(String keyword);
+    public String getMyprice(String keyword,String device);
+//    public String getMyprice_mobile(String keyword);
 }
