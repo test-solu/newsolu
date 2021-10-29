@@ -18,6 +18,7 @@
 	
 	function let_write_mykey(data,mk){
 		var li_extended = "";
+		var li_pc_cnt = "";
     	$.ajax({
     		type		:	"GET",
     		url			:	"/getExtended",
@@ -25,6 +26,14 @@
     		dataType	:	"json",
     		success		:	function(data){
     			var keylist = data.keywordList;
+    			li_pc_cnt += "<li>"+keylist[0].monthlyPcQcCnt+" 회</li>";
+    			li_pc_cnt += "<li>"+keylist[0].monthlyMobileQcCnt+" 회</li>";
+    			li_pc_cnt += "<li>"+keylist[0].monthlyAvePcClkCnt+" 회</li>";
+    			li_pc_cnt += "<li>"+keylist[0].monthlyAveMobileClkCnt+" 회</li>";
+    			li_pc_cnt += "<li>"+keylist[0].monthlyAvePcCtr+" %</li>";
+    			li_pc_cnt += "<li>"+keylist[0].monthlyAveMobileCtr+" %</li>";
+    			li_pc_cnt += "<li>"+keylist[0].plAvgDepth+" 개</li>";
+    			$("#qc_cnt").html(li_pc_cnt);
     			for(var i=0; i<keylist.length; i++){
     				li_extended	+= "<li id='bfo_"+i+"' onclick='check_mk_extended("+i+","+keylist.length+")' >" + keylist[i].relKeyword + "</li>";
     			}
@@ -58,15 +67,15 @@
     			var pc_bi = data.pc.estimate;
     			var mo_bi = data.Mobile.estimate
     			for(var i=0; i<pc_bi.length; i++){
-    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
     			}
     			for(var j=0; j<mo_bi.length; j++){
-    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
     			}
     			$("#td_inner_check").html(my_price);
     			$("#td_inner_check_m").html(my_price_m);
     		},error		:	function(e){
-    			console.log(e.statusText);
+    			console.log(" error >>>>> "+e.statusText);
     		}
     	});
     	var submenuf = $(".five-acate-open");
@@ -78,25 +87,78 @@
 		var my_key = data[0];
 		console.log(my_key);
 		var ctx = document.getElementById('chart').getContext('2d');
+		var label = [];
+		var d_pc = [];
+		var data_mb = [];
+		
+		//날짜 입력
+		label[0] = data[0].month_1;
+		label[1] = data[0].month_2;
+		label[2] = data[0].month_3;
+		label[3] = data[0].month_4;
+		label[4] = data[0].month_5;
+		label[5] = data[0].month_6;
+		label[6] = data[0].month_7;
+		label[7] = data[0].month_8;
+		label[8] = data[0].month_9;
+		label[9] = data[0].month_10;
+		label[10] = data[0].month_11;
+		label[11] = data[0].month_12;
+		label[12] = data[0].month_13;
+		
+		//pc 금액
+		d_pc[0] = data[0].schCntPC_1;
+		d_pc[1] = data[0].schCntPC_2;
+		d_pc[2] = data[0].schCntPC_3;
+		d_pc[3] = data[0].schCntPC_4;
+		d_pc[4] = data[0].schCntPC_5;
+		d_pc[5] = data[0].schCntPC_6;
+		d_pc[6] = data[0].schCntPC_7;
+		d_pc[7] = data[0].schCntPC_8;
+		d_pc[8] = data[0].schCntPC_9;
+		d_pc[9] = data[0].schCntPC_10;
+		d_pc[10] = data[0].schCntPC_11;
+		d_pc[11] = data[0].schCntPC_12;
+		d_pc[12] = data[0].schCntPC_13;
+		
+		//mobile
+		data_mb[0] = data[0].schCntMO_1;
+		data_mb[1] = data[0].schCntMO_2;
+		data_mb[2] = data[0].schCntMO_3;
+		data_mb[3] = data[0].schCntMO_4;
+		data_mb[4] = data[0].schCntMO_5;
+		data_mb[5] = data[0].schCntMO_6;
+		data_mb[6] = data[0].schCntMO_7;
+		data_mb[7] = data[0].schCntMO_8;
+		data_mb[8] = data[0].schCntMO_9;
+		data_mb[9] = data[0].schCntMO_10;
+		data_mb[10] = data[0].schCntMO_11;
+		data_mb[11] = data[0].schCntMO_12;
+		data_mb[12] = data[0].schCntMO_13;
+						
 		new Chart(ctx, {
 		type: 'line',
 		data: {
-		labels: ['2021-08', '2021-07', '2021-06', '2021-05', '2021-04', '2021-03'],
-		datasets: [{
-		label: 'PC',
-		yAxisID: 'A',
-		borderColor: '#678184',
-		backgroundColor: 'white',
-		data: [8040, 9660 , 12000 , 10800 , 12800 , 12300],
-		fill: false
-		}, {
-		label: 'Mobile',
-		yAxisID: 'D',
-		borderColor: '#2faebb',
-		backgroundColor: 'white',
-		data: [80400 , 106100 , 129700 , 124100 , 131100 , 136000 ],
-		fill: false
-		}]
+		labels: label,
+		datasets: [
+			{
+			label: 'PC',
+			yAxisID: 'A',
+			borderColor: '#678184',
+			backgroundColor: 'white',
+			//data: [53490,78787,98989,8746,12300,12320,22220,19280,29380,120947,123495,12340,18293],
+			data: d_pc,
+			fill: false
+			}, 
+			{
+			label: 'Mobile',
+			yAxisID: 'D',
+			borderColor: '#2faebb',
+			backgroundColor: 'white',
+			data: data_mb,
+			fill: false
+			}
+		]
 		},
 		options: {
 		tooltips: {
@@ -109,8 +171,8 @@
 		position: 'left',
 		ticks: {
 		min: 5000,
-		max: 15000,
-		stepSize: 2000,
+		max: 90000,
+		stepSize: 10000,
 		fontColor: '#678184',
 		callback: function(value, index, values) {
 		return value;

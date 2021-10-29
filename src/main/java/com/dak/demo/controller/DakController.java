@@ -132,11 +132,11 @@ public class DakController {
 		ArrayList<DakDto> result = new ArrayList<>();
 		Thread th = new Thread();
 		try {
-			logger.info("test >>> thread");
 			service.insert_my_keyword(keyword);
-			th.sleep(15000);
+			logger.info("test >>> ");
+			th.sleep(17000);
+			logger.info(" next do >>> ");
 			result = service.getList(keyword);
-			logger.info("test >>> asdfasdfasdfasdf");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

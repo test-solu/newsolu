@@ -170,10 +170,10 @@
     			var pc_bi = data.pc.estimate;
     			var mo_bi = data.Mobile.estimate
     			for(var i=0; i<pc_bi.length; i++){
-    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
     			}
     			for(var j=0; j<mo_bi.length; j++){
-    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "</li>";
+    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
     			}
     			$("#td_inner_prive").html(my_price);
     			$("#td_inner_mprice").html(my_price_m);
@@ -448,7 +448,7 @@
                                         </ul>
                                     </td>
                                     <td class="td_inner">
-                                        <ul>
+                                        <ul id="qc_cnt">
                                             <li>8,500 회</li> 
                                             <li>91,600 회</li> 
                                             <li>69 회</li> 

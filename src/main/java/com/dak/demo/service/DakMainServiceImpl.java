@@ -112,6 +112,7 @@ public class DakMainServiceImpl implements DakMainService{
 
 	@Override
 	public void insert_my_keyword(String keyword) {
+		logger.info(" [ insert_my_keyword : service ] ");
 		dao.insert_my_keyword(keyword);
 	}
 
