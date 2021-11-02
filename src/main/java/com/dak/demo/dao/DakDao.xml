@@ -25,7 +25,8 @@
     
     <insert id="insert_my_keyword" parameterType="String">
     	insert		
-    	into	CrawlData.dbo.NKT_List
+    	<!-- into	CrawlData.dbo.NKT_List -->
+    	into	CrawlData.dbo.NKT_Web_List
 				(
 				Keyword
 				)

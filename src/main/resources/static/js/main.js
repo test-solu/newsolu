@@ -26,13 +26,17 @@
     		dataType	:	"json",
     		success		:	function(data){
     			var keylist = data.keywordList;
-    			li_pc_cnt += "<li>"+keylist[0].monthlyPcQcCnt+" 회</li>";
-    			li_pc_cnt += "<li>"+keylist[0].monthlyMobileQcCnt+" 회</li>";
-    			li_pc_cnt += "<li>"+keylist[0].monthlyAvePcClkCnt+" 회</li>";
-    			li_pc_cnt += "<li>"+keylist[0].monthlyAveMobileClkCnt+" 회</li>";
-    			li_pc_cnt += "<li>"+keylist[0].monthlyAvePcCtr+" %</li>";
-    			li_pc_cnt += "<li>"+keylist[0].monthlyAveMobileCtr+" %</li>";
-    			li_pc_cnt += "<li>"+keylist[0].plAvgDepth+" 개</li>";
+    			li_pc_cnt += "<li>" + keylist[0].monthlyPcQcCnt.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +" 회</li>";
+    			li_pc_cnt += "<li>" + keylist[0].monthlyMobileQcCnt.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + " 회</li>";
+    			var monave_pc_clk = keylist[0].monthlyAvePcClkCnt;
+    			li_pc_cnt += "<li>" + Math.round(monave_pc_clk).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +" 회</li>";
+    			var monave_mo_clk = keylist[0].monthlyAveMobileClkCnt;
+    			li_pc_cnt += "<li>" + Math.round(monave_mo_clk).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +" 회</li>";
+    			var month_avepcctr = keylist[0].monthlyAvePcCtr;
+    			li_pc_cnt += "<li>" + month_avepcctr.toFixed(1) + " %</li>";
+    			var month_avemoctr = keylist[0].monthlyAveMobileCtr;
+    			li_pc_cnt += "<li>" + month_avemoctr.toFixed(1) + " %</li>";
+    			li_pc_cnt += "<li>" + keylist[0].plAvgDepth + " 개</li>";
     			$("#qc_cnt").html(li_pc_cnt);
     			for(var i=0; i<keylist.length; i++){
     				li_extended	+= "<li id='bfo_"+i+"' onclick='check_mk_extended("+i+","+keylist.length+")' >" + keylist[i].relKeyword + "</li>";
@@ -52,6 +56,19 @@
     			$("#bfo_"+i).attr("class", "on five-acate-top");
     		}
     	}
+    	$(window).resize(function(){ if (window.innerWidth < 1000) { 
+    		 if ($('#showHidefo').is(":hidden")) {
+         	     $('#showHidefo').animate({"height": "400px"}, "medium");
+      		     $('#showHideth').removeClass("stop-scroll");
+     	    } else {
+     	         $('#showHidefo').animate({"height": "40px"}, "medium");
+     	         $('#showHidefo').addClass("stop-scroll");
+      		}
+        } else {  } }).resize();
+        $("#bfo_"+seq).prependTo($("#bfo_"+seq).parent())
+    	$("#bfo_"+seq).parent().animate({
+    	    scrollTop: 0
+    	})
     	check_mk_price($("#bfo_"+seq).text());
     }
 	
@@ -67,10 +84,10 @@
     			var pc_bi = data.pc.estimate;
     			var mo_bi = data.Mobile.estimate
     			for(var i=0; i<pc_bi.length; i++){
-    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
+    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원</li>";
     			}
     			for(var j=0; j<mo_bi.length; j++){
-    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
+    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원</li>";
     			}
     			$("#td_inner_check").html(my_price);
     			$("#td_inner_check_m").html(my_price_m);
@@ -85,11 +102,18 @@
     
     function make_key_Competitiveness(data){
 		var my_key = data[0];
-		console.log(my_key);
+		//console.log(my_key);
 		var ctx = document.getElementById('chart').getContext('2d');
 		var label = [];
 		var d_pc = [];
 		var data_mb = [];
+		var min_p = 0;
+		var max_p = 0;
+		var ave_p = 0;
+		
+		var min_m = 0;
+		var max_m = 0;
+		var ave_m = 0;
 		
 		//날짜 입력
 		label[0] = data[0].month_1;
@@ -121,6 +145,10 @@
 		d_pc[11] = data[0].schCntPC_12;
 		d_pc[12] = data[0].schCntPC_13;
 		
+		min_p = check_min(d_pc);
+		max_p = check_max(d_pc);
+		ave_p = check_ave(d_pc);
+		
 		//mobile
 		data_mb[0] = data[0].schCntMO_1;
 		data_mb[1] = data[0].schCntMO_2;
@@ -135,7 +163,20 @@
 		data_mb[10] = data[0].schCntMO_11;
 		data_mb[11] = data[0].schCntMO_12;
 		data_mb[12] = data[0].schCntMO_13;
-						
+		
+		min_m = check_min(data_mb);
+		max_m = check_max(data_mb);
+		ave_m = check_ave(data_mb);
+		
+		console.log("min pc : " + min_p);
+		console.log("max pc : " + max_p);
+		console.log("ave pc : " + ave_p)
+		
+		console.log("min mobile : " + min_m);
+		console.log("max mobile : " + max_m);
+		console.log("ave mobile : " + ave_m);
+		
+		
 		new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -170,9 +211,9 @@
 		type: 'linear',
 		position: 'left',
 		ticks: {
-		min: 5000,
-		max: 90000,
-		stepSize: 10000,
+		min: min_p,
+		max: max_p,
+		stepSize: ave_p,
 		fontColor: '#678184',
 		callback: function(value, index, values) {
 		return value;
@@ -183,9 +224,9 @@
 		type: 'linear',
 		position: 'right',
 		ticks: {
-		min: 50000,
-		max: 150000,
-		stepSize: 20000,
+		min: min_m,
+		max: max_m,
+		stepSize: ave_m,
 		fontColor: '#2faebb',
 		callback: function(value, index, values) {
 		return value;
@@ -212,3 +253,39 @@
         submenud.css(":visible");
         submenud.slideDown();
 	}
+	
+	function check_min(myprice){
+		var min = myprice[0];
+		
+		for(var i = 0; i < myprice.length; i++){
+			if(min > myprice[i]){
+				min = myprice[i];
+			}
+		}
+		
+		
+		return min;
+	}
+	function check_max(myprice){
+		var max = 0;
+		
+		for(var i = 0; i < myprice.length; i++){
+			if(max < myprice[i]){
+				max = myprice[i];
+			}
+		}
+		
+		return max;
+	}
+	function check_ave(myprice){
+		var ave = 0;
+		var sum = 0;
+		for(var i = 0; i < myprice.length; i++){
+			sum += myprice[i];
+		}
+		ave = sum / 13;
+		ave = ave / 10;
+		
+		return Math.round(ave);
+	}
+	

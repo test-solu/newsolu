@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon">
     
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="resources/js/click.js"></script>
@@ -38,7 +38,7 @@
     </script>
 
     <script>
-        $(document).ready(function(){ 
+      //  $(document).ready(function(){ 
         	//$("#bon_0").attr("class", "on first-acate-top");
         	
         	
@@ -70,7 +70,7 @@
             
             //alert($(".first-acate-top").text());
             
-        });
+      //  });
 
 
     //   $( document ).ready( function() {
@@ -88,10 +88,24 @@
     	for(var i = 0; i < end; i++){
     		$("#bon_"+i).attr("class", "");
     		if(i == seq){
-    			$("#bon_"+i).attr("class", "on first-acate-top");
+    			$("#bon_"+seq).attr("class", "on first-acate-top");
     		}
     	}
+    	$(window).resize(function(){ if (window.innerWidth < 1000) { 
+    		if ($('#showHideon').is(":hidden")) {
+        	    $('#showHideon').animate({"height": "400px"}, "medium");
+          	 	$('#showHideon').removeClass("stop-scroll");
+          	} else {
+          	 	$('#showHideon').animate({"height": "40px"}, "medium");  
+          	  	$('#showHideon').addClass("stop-scroll");
+            }
+    	 } else {  } }).resize();
+    	$("#bon_"+seq).prependTo($("#bon_"+seq).parent())
+    	$("#bon_"+seq).parent().animate({
+    	    scrollTop: 0
+    	})
     			click_t(f_seq);
+    			
     }
     
     function click_t(seq){
@@ -121,6 +135,19 @@
     			$("#btw_"+i).attr("class", "on sec-acate-top");
     		}
     	}
+    	$(window).resize(function(){ if (window.innerWidth < 1000) { 
+    		if ($('#showHidetw').is(":hidden")) {
+          	 	$('#showHidetw').animate({"height": "400px"}, "medium");
+           	  	$('#showHidetw').removeClass("stop-scroll");
+        	} else {
+            	$('#showHidetw').animate({"height": "40px"}, "medium");
+            	$('#showHidetw').addClass("stop-scroll");
+       		}
+    	} else {  } }).resize();
+    	$("#btw_"+seq).prependTo($("#btw_"+seq).parent())
+    	$("#btw_"+seq).parent().animate({
+    	    scrollTop: 0
+    	})
     	click_extended($("#btw_"+seq).text());
     }
     
@@ -155,6 +182,19 @@
     			$("#bth_"+i).attr("class", "on third-acate-top");
     		}
     	}
+    	$(window).resize(function(){ if (window.innerWidth < 1000) { 
+    	 if ($('#showHideth').is(":hidden")) {
+             $('#showHideth').animate({"height": "400px"}, "medium");
+             $('#showHideth').removeClass("stop-scroll");
+         } else {
+             $('#showHideth').animate({"height": "40px"}, "medium");  
+             $('#showHideth').addClass("stop-scroll");
+         }
+    	} else {  } }).resize();
+    	$("#bth_"+seq).prependTo($("#bth_"+seq).parent())
+    	$("#bth_"+seq).parent().animate({
+    	    scrollTop: 0
+    	})
     	click_myprice($("#bth_"+seq).text());
     }
     
@@ -170,10 +210,10 @@
     			var pc_bi = data.pc.estimate;
     			var mo_bi = data.Mobile.estimate
     			for(var i=0; i<pc_bi.length; i++){
-    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
+    				my_price	+= "<li>" + pc_bi[i].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원</li>";
     			}
     			for(var j=0; j<mo_bi.length; j++){
-    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); + "원</li>";
+    				my_price_m	+= "<li>" + mo_bi[j].bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원</li>";
     			}
     			$("#td_inner_prive").html(my_price);
     			$("#td_inner_mprice").html(my_price_m);
