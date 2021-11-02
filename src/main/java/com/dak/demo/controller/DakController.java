@@ -133,9 +133,7 @@ public class DakController {
 		Thread th = new Thread();
 		try {
 			service.insert_my_keyword(keyword);
-			//logger.info("test >>> ");
 			th.sleep(15000);
-			//logger.info(" next do >>> " + service.getList(keyword));
 			result = service.getList(keyword);
 		} catch (Exception e) {
 			// TODO: handle exception

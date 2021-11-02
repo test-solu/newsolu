@@ -168,14 +168,13 @@
 		max_m = check_max(data_mb);
 		ave_m = check_ave(data_mb);
 		
-		console.log("min pc : " + min_p);
+	/*	console.log("min pc : " + min_p);
 		console.log("max pc : " + max_p);
 		console.log("ave pc : " + ave_p)
 		
 		console.log("min mobile : " + min_m);
 		console.log("max mobile : " + max_m);
-		console.log("ave mobile : " + ave_m);
-		
+		console.log("ave mobile : " + ave_m);*/
 		
 		new Chart(ctx, {
 		type: 'line',
