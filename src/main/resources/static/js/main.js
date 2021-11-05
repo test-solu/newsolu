@@ -1,22 +1,35 @@
 		
+	function enterkey(){
+		var mk = $("#check_mk").val();
+		if(window.event.keyCode == 13){
+			if(mk.length == 0) {
+				alert("검색어를 입력하세요");
+				return;
+			} else {
+				check_my_keyword();
+			}
+		}
+	}
 
 	function check_my_keyword() {
 		$(".sub-open-fo").hide();
 		var mk = $("#check_mk").val();
+		let_write_mykey(mk);
+		
 		$.ajax({
     		type		:	"GET",
     		url			:	"/check_my_keyword",
     		data		:	{keyword:mk},
     		dataType	:	"json",
     		success		:	function(data){
-				let_write_mykey(data,mk);
+				make_key_Competitiveness(data);
     		},error		:	function(e){
     			alert(e.statusText);
     		}
     	});
 	}
 	
-	function let_write_mykey(data,mk){
+	function let_write_mykey(mk){
 		var li_extended = "";
 		var li_pc_cnt = "";
     	$.ajax({
@@ -46,7 +59,10 @@
     			alert(e.statusText);
     		}
     	});
-		make_key_Competitiveness(data);
+    	var submenud = $(".four-acate-open");
+        submenud.css(":visible");
+        submenud.slideDown();
+	//	make_key_Competitiveness(data);
 	}
 	
 	function check_mk_extended(seq,end){
@@ -248,7 +264,7 @@
 		}
 		}
 		});
-		var submenud = $(".four-acate-open");
+		var submenud = $(".six-acate-open");
         submenud.css(":visible");
         submenud.slideDown();
 	}

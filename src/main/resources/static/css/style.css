@@ -188,7 +188,7 @@
     .sub-open-fi {display: none;}
     
     .cate-but {display: none;}
-
+    .td_inner ul {overflow: hidden !important;}
 
 @media screen and (max-width: 1150px) {
     .heig {height: auto;}
@@ -233,5 +233,7 @@
     .container .pc {display: none;}
     .container .m {display: block;}
     
-    .cate-but {display: block; border: 0; background: transparent; width: 30px; height: 30px; position: absolute; margin-top: 4px; font-size: 18px; color: #fff; right: 12%; font-family: 'HSYuji-Regular'; background-image: url(../img/slide.png);   background-size: contain;  background-repeat: no-repeat;}
+    .cate-but {display: block; border: 0; background: transparent; width: 30px; height: 30px; position: absolute; margin-top: 4px; font-size: 18px; color: #fff; right: 12%; font-family: 'HSYuji-Regular'; background-image: url(../img/slide.png);   background-size: contain;  background-repeat: no-repeat; cursor: pointer;}
+
+    .stop-scroll {overflow: hidden !important;}
 }

@@ -463,16 +463,91 @@
             <div class="sub_content">
                 <div class="container_but">
                     <div class="guide">검색어 인사이트</div>
-                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요"/></div>
+                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요" onkeyup="enterkey()"/></div>
                     <div class="button fw four-acate-top" onclick="check_my_keyword()">분석하기</div>
                 </div>
                 <div class="container sec">
+                	                    <div class="per20">
+                        <div class="sub_inner flex">
+                            <h5>확장키워드</h5>
+                            <button id="afo" class="cate-but"></button>
+                            <ul id="showHidefo" class="click sub-open-fo four-acate-open" >
+          
+                            </ul>
+                        </div>
+                    </div>
 
+                    <div class="per40">
+                        <div class="sub_inner flex">
+                        <h5>바로 보는 순위별 입찰가</h5>
+ 
+                            <div class="sub-open-fi sub-open-fo five-acate-open mb45" style="margin: 0 auto;">
+                                <table class="tg">
+                                    <thead>
+                                        <tr> <th class="th_inner" colspan="2">PC</th> </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="td_inner">
+                                            <ul>
+                                                <li>1위</li>
+                                                <li>2위</li>
+                                                <li>3위</li>
+                                                <li>4위</li>
+                                                <li>5위</li>
+                                                <li>6위</li>
+                                                <li>7위</li>
+                                                <li>8위</li>
+                                                <li>9위</li>
+                                                <li>10위</li>
+                                            </ul>
+                                        </td>
+                                        <td class="td_inner">
+                                            <ul id="td_inner_check">
+                                             
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <table class="tg">
+                                    <thead>
+                                        <tr> <th class="th_inner" colspan="2">Mobile</th> </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="td_inner">
+                                            <ul>
+                                            <li>1위</li>
+                                            <li>2위</li>
+                                            <li>3위</li>
+                                            <li>4위</li>
+                                            <li>5위</li>
+                                            </ul>
+                                        </td>
+                                        <td class="td_inner">
+                                            <ul id="td_inner_check_m">
+                                           <!--  <li>1,810원</li>
+                                            <li>1,330원</li>
+                                            <li>1,170원</li>
+                                            <li>70원</li>
+                                            <li>70원</li> -->
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                    </div>
+                </div>
                     <div class="per30">
                         <div class="sub_inner flex heig">
                             <h5>키워드 경쟁력</h5>
                            
-                            <div class="sub-open-fo four-acate-open" style="margin: 0 auto;">
+                            <div class="sub-open-fo six-acate-open" style="margin: 0 auto;">
                             <table class="tg" style="width: 100%; text-align: left;">
                                 <tbody>
                                 <tr>
@@ -519,147 +594,14 @@
                         <div class="sub_inner flex">
                             <h5>최근 6개월 키워드 검색량</h5>
 
-                            <div class="sub-open-fo four-acate-open" style="width:100%;">
+                            <div class="sub-open-fo six-acate-open" style="width:100%;">
                                 <canvas id="chart" height="250"></canvas>
                                 </div>
                              
                         </div>
                     </div>
                     
-                    <div class="per20">
-                        <div class="sub_inner flex">
-                            <h5>확장키워드</h5>
-                            <button id="afo" class="cate-but"></button>
-                            <ul id="showHidefo" class="click sub-open-fo four-acate-open" i>
-                                <!-- <li>	블라우스	</li>
-                                <li>	검정블라우스	</li>
-                                <li>	남색블라우스	</li>
-                                <li>	레드블라우스	</li>
-                                <li id="bfo" class="on five-acate-top">	레이스블라우스	</li>
-                                <li>	로엠블라우스	</li>
-                                <li>	루즈핏린넨블라우스	</li>
-                                <li>	린넨셔츠자켓	</li>
-                                <li>	베네통체크	</li>
-                                <li>	보라색블라우스	</li>
-                                <li>	블라우스셔츠	</li>
-                                <li>	블라우스쇼핑몰	</li>
-                                <li>	블랙블라우스	</li>
-                                <li>	블루블라우스	</li>
-                                <li>	빅카라블라우스	</li>
-                                <li>	셔링블라우스	</li>
-                                <li>	쉬폰블라우스	</li>
-                                <li>	써스데이아일랜드데님	</li>
-                                <li>	써스데이아일랜드블라우스	</li>
-                                <li>	여름블라우스	</li>
-                                <li>	여성남방	</li>
-                                <li>	여성반팔블라우스	</li>
-                                <li>	여성블라우스	</li>
-                                <li>	여성상의	</li>
-                                <li>	여성오피스룩	</li>
-                                <li>	여성티블라우스	</li>
-                                <li>	연말블라우스	</li>
-                                <li>	옐로우블라우스	</li>
-                                <li>	오렌지블라우스	</li>
-                                <li>	온앤온	</li>
-                                <li>	자수블라우스	</li>
-                                <li>	자켓블라우스	</li>
-                                <li>	지컷블라우스	</li>
-                                <li>	초록블라우스	</li>
-                                <li>	케네스레이디블라우스	</li>
-                                <li>	퍼플블라우스	</li>
-                                <li>	프릴블라우스	</li>
-                                <li>	화이트블라우스	</li>
-                                <li>	흰블라우스	</li>
-                                <li>	분홍블라우스	</li>
-                                <li>	녹색블라우스	</li>
-                                <li>	가을블라우스	</li>
-                                <li>	지이크블라우스	</li>
-                                <li>	soup블라우스	</li>
-                                <li>	베스띠벨리블라우스	</li>
-                                <li>	SI블라우스	</li>
-                                <li>	랩블라우스	</li>
-                                <li>	헤지스블라우스	</li>
-                                <li>	버버리블라우스	</li>
-                                <li>	더틸버리블라우스	</li>   -->
-                            </ul>
-                        </div>
-                    </div>
 
-                    <div class="per40">
-                        <div class="sub_inner flex">
-                        <h5>바로 보는 순위별 입찰가</h5>
- 
-                            <div class="sub-open-fi sub-open-fo five-acate-open mb45" style="margin: 0 auto;">
-                                <table class="tg">
-                                    <thead>
-                                        <tr> <th class="th_inner" colspan="2">PC</th> </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="td_inner">
-                                            <ul>
-                                                <li>1위</li>
-                                                <li>2위</li>
-                                                <li>3위</li>
-                                                <li>4위</li>
-                                                <li>5위</li>
-                                                <li>6위</li>
-                                                <li>7위</li>
-                                                <li>8위</li>
-                                                <li>9위</li>
-                                                <li>10위</li>
-                                            </ul>
-                                        </td>
-                                        <td class="td_inner">
-                                            <ul id="td_inner_check">
-                                               <!--  <li>2,960원</li>
-                                                <li>1,900원</li>
-                                                <li>1,550원</li>
-                                                <li>1,330원</li>
-                                                <li>1,130원</li>
-                                                <li>1,040원</li>
-                                                <li>990원</li>
-                                                <li>950원</li>
-                                                <li>910원</li>
-                                                <li>880원</li> -->
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                
-                                <table class="tg">
-                                    <thead>
-                                        <tr> <th class="th_inner" colspan="2">Mobile</th> </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="td_inner">
-                                            <ul>
-                                            <li>1위</li>
-                                            <li>2위</li>
-                                            <li>3위</li>
-                                            <li>4위</li>
-                                            <li>5위</li>
-                                            </ul>
-                                        </td>
-                                        <td class="td_inner">
-                                            <ul id="td_inner_check_m">
-                                           <!--  <li>1,810원</li>
-                                            <li>1,330원</li>
-                                            <li>1,170원</li>
-                                            <li>70원</li>
-                                            <li>70원</li> -->
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-
-                    </div>
-                </div>
             </div>
         </div>
 
