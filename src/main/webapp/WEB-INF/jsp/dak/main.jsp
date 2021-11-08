@@ -38,7 +38,7 @@
     </script>
 
     <script>
-      //  $(document).ready(function(){ 
+       // $(document).ready(function(){ 
         	//$("#bon_0").attr("class", "on first-acate-top");
         	
         	
@@ -69,6 +69,7 @@
             }); */
             
             //alert($(".first-acate-top").text());
+        //	$("#bfo_0").trigger("click");
             
       //  });
 
@@ -594,7 +595,7 @@
                         <div class="sub_inner flex">
                             <h5>최근 6개월 키워드 검색량</h5>
 
-                            <div class="sub-open-fo six-acate-open" style="width:100%;">
+                            <div class="sub-open-fo seven-acate-open" style="width:100%;">
                                 <canvas id="chart" height="250"></canvas>
                                 </div>
                              
