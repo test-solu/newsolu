@@ -50,7 +50,7 @@ public class DakController {
 		try {
 			cateList = service.getCategory();
 		} catch (Exception e) {
-			logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+			logger.info("main error : " + e.getMessage());
 		}
 		mav.addObject("cateList", cateList);
 		mav.addObject("cateList_leng", cateList.size());
