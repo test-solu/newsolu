@@ -1,4 +1,5 @@
 		
+	var check_first = 0;
 	function getSixmonth(mk){
 		$.ajax({
     		type		:	"GET",
@@ -41,6 +42,8 @@
     				}
     				$("#showHidefo").html(li_extended);
     				$("#bfo_0").trigger("click");
+				} else {
+					check_first = 2;
 				}
     		},error		:	function(e){
     			alert(e.statusText);
@@ -61,6 +64,7 @@
 	}
 
 	function check_my_keyword() {
+		check_first = 1;
 		$(".sub-open-fo").hide();
 		var mk = $("#check_mk").val();
 		let_write_mykey(mk);
@@ -122,7 +126,9 @@
     	});
     	
     	getCompetitiveness(mykey,2);
-    	getSixmonth(mykey);
+    	if(check_first == 2){
+    		getSixmonth(mykey);	
+		}
     	
     	var submenuf = $(".five-acate-open");
         submenuf.css(":visible");
@@ -134,7 +140,7 @@
     
     function make_key_Competitiveness(data){
 		var my_key = data[0];
-		console.log(my_key);
+		//console.log(my_key);
 		var ctx = document.getElementById('chart').getContext('2d');
 		var label = [];
 		var d_pc = [];
@@ -179,14 +185,6 @@
 		min_m = check_min(data_mb);
 		max_m = check_max(data_mb);
 		ave_m = check_ave(data_mb);
-		
-	/*	console.log("min pc : " + min_p);
-		console.log("max pc : " + max_p);
-		console.log("ave pc : " + ave_p)
-		
-		console.log("min mobile : " + min_m);
-		console.log("max mobile : " + max_m);
-		console.log("ave mobile : " + ave_m);*/
 		
 		new Chart(ctx, {
 		type: 'line',
