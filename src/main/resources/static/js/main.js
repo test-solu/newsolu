@@ -68,6 +68,7 @@
 		$(".sub-open-fo").hide();
 		var mk = $("#check_mk").val();
 		let_write_mykey(mk);
+		clearCanvas();
 		getSixmonth(mk);
 	}
 	
@@ -138,9 +139,17 @@
         submenud.slideDown();
     }
     
-    function make_key_Competitiveness(data){
-		var my_key = data[0];
-		//console.log(my_key);
+    function clearCanvas(){
+		console.log("test clear ");
+		var canvas = document.getElementById('chart');
+		var ctx = canvas.getContext('2d');
+		ctx.setTransform(1, 0, 0, 1, 0, 0);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.restore();
+	}
+    
+    function make_key_Competitiveness(mydata){
+		var my_key = mydata[0];
 		var ctx = document.getElementById('chart').getContext('2d');
 		var label = [];
 		var d_pc = [];
@@ -224,6 +233,7 @@
 		stepSize: ave_p,
 		fontColor: '#678184',
 		callback: function(value, index, values) {
+			console.log("value " + value + " index " + index + " values " + values);
 		return value;
 		}
 		}
@@ -323,6 +333,6 @@
 		
 		ave = (max - min) / 10;
 		
-		return ave;
+		return Math.round(ave);
 	}
 	
