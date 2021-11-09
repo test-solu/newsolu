@@ -140,7 +140,6 @@
     }
     
     function clearCanvas(){
-		console.log("test clear ");
 		var canvas = document.getElementById('chart');
 		var ctx = canvas.getContext('2d');
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -233,7 +232,6 @@
 		stepSize: ave_p,
 		fontColor: '#678184',
 		callback: function(value, index, values) {
-			console.log("value " + value + " index " + index + " values " + values);
 		return value;
 		}
 		}
