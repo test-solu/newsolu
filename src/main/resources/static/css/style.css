@@ -237,3 +237,17 @@
 
     .stop-scroll {overflow: hidden !important;}
 }
+
+
+/* 카카오톡채널톡추가 1108 */
+
+#ch-plugin-core > .sJAiX {bottom: 80px !important;}
+#ch-plugin-core > .dhMiir {right: 25px !important; bottom: 105px !important;}
+.hgRlbE > .fBGgqH {width: 70px !important; height: 70px !important; border-radius: 50px !important;}
+.sub_inner .sub-open-th {max-height: 525px;}
+.sub_inner .sub-open-fi {max-height: 660px;}
+        
+@media screen and (max-width: 1030px) {
+#ch-plugin-core > .dhMiir {right: 15px !important; bottom: 75px !important;}
+.hgRlbE > .fBGgqH {width: 55px !important; height: 55px !important;}
+}
