@@ -171,7 +171,7 @@
 		
 		min_p = check_min(d_pc);
 		max_p = check_max(d_pc);
-		ave_p = check_ave(d_pc);
+		ave_p = check_ave(max_p, min_p);
 		
 		//mobile 금액
 		data_mb[0] = my_key.schCntMO_6;
@@ -184,7 +184,7 @@
 		
 		min_m = check_min(data_mb);
 		max_m = check_max(data_mb);
-		ave_m = check_ave(data_mb);
+		ave_m = check_ave(max_m, min_m);
 		
 		new Chart(ctx, {
 		type: 'line',
@@ -270,8 +270,24 @@
 				min = myprice[i];
 			}
 		}
-		
-		
+		var str = min.toString();
+		if(str.length==2){
+            min = parseInt(str.substring(0,1)) * 10;
+        } else if (str.length==3) {
+            min = parseInt(str.substring(0,1)) * 100;
+        } else if (str.length==4) {
+            min = parseInt(str.substring(0,1)) * 1000;
+        } else if (str.length==5) {
+            min = parseInt(str.substring(0,1)) * 10000;
+        } else if (str.length==6) {
+            min = parseInt(str.substring(0,1)) * 100000;
+        } else if (str.length==7) {
+            min = parseInt(str.substring(0,1)) * 1000000;
+        } else if (str.length==8) {
+            min = parseInt(str.substring(0,1)) * 10000000;
+        } else if (str.length==9) {
+            min = parseInt(str.substring(0,1)) * 100000000;
+        }
 		return min;
 	}
 	function check_max(myprice){
@@ -282,18 +298,31 @@
 				max = myprice[i];
 			}
 		}
-		
+		var str = max.toString();
+		if(str.length==2){
+			max = (parseInt(str.substring(0,1)) + 1) * 10;
+        } else if(str.length==3) {
+			max = (parseInt(str.substring(0,1)) + 1) * 100;
+        } else if (str.length==4) {
+			max = (parseInt(str.substring(0,2)) + 1) * 100;
+        } else if (str.length==5) {
+			max = (parseInt(str.substring(0,2)) + 1) * 1000;
+        } else if (str.length==6) {
+			max = (parseInt(str.substring(0,2)) + 1) * 10000;
+        } else if (str.length==7) {
+			max = (parseInt(str.substring(0,2)) + 1) * 100000;
+        } else if (str.length==8) {
+			max = (parseInt(str.substring(0,2)) + 1) * 1000000;
+        } else if (str.length==9) {
+			max = (parseInt(str.substring(0,2)) + 1) * 10000000;
+        }
 		return max;
 	}
-	function check_ave(myprice){
+	function check_ave(max, min){
 		var ave = 0;
-		var sum = 0;
-		for(var i = 0; i < myprice.length; i++){
-			sum += myprice[i];
-		}
-		ave = sum / 13;
-		ave = ave / 10;
 		
-		return Math.round(ave);
+		ave = (max - min) / 10;
+		
+		return ave;
 	}
 	
