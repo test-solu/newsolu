@@ -68,7 +68,6 @@
 		$(".sub-open-fo").hide();
 		var mk = $("#check_mk").val();
 		let_write_mykey(mk);
-		clearCanvas();
 		getSixmonth(mk);
 	}
 	
@@ -138,16 +137,9 @@
         submenud.css(":visible");
         submenud.slideDown();
     }
-    
-    function clearCanvas(){
-		var canvas = document.getElementById('chart');
-		var ctx = canvas.getContext('2d');
-		ctx.setTransform(1, 0, 0, 1, 0, 0);
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.restore();
-	}
-    
+    var chartObj = null;
     function make_key_Competitiveness(mydata){
+		//console.log(mydata);
 		var my_key = mydata[0];
 		var ctx = document.getElementById('chart').getContext('2d');
 		var label = [];
@@ -194,77 +186,90 @@
 		max_m = check_max(data_mb);
 		ave_m = check_ave(max_m, min_m);
 		
-		new Chart(ctx, {
+		var config = {
 		type: 'line',
 		data: {
-		labels: label,
-		datasets: [
-			{
-			label: 'PC',
-			yAxisID: 'A',
-			borderColor: '#678184',
-			backgroundColor: 'white',
-			data: d_pc,
-			fill: false
-			}, 
-			{
-			label: 'Mobile',
-			yAxisID: 'D',
-			borderColor: '#2faebb',
-			backgroundColor: 'white',
-			data: data_mb,
-			fill: false
-			}
-		]
+			labels: label,
+			datasets: [{
+				label: 'PC',
+				yAxisID: 'A',
+				borderColor: '#678184',
+				backgroundColor: 'white',
+				data: d_pc,
+				fill: false
+				}, 
+				{
+				label: 'Mobile',
+				yAxisID: 'D',
+				borderColor: '#2faebb',
+				backgroundColor: 'white',
+				data: data_mb,
+				fill: false
+			}]
 		},
 		options: {
-		tooltips: {
-		mode: 'nearest'
-		},
-		scales: {
-		yAxes: [{
-		id: 'A',
-		type: 'linear',
-		position: 'left',
-		ticks: {
-		min: min_p,
-		max: max_p,
-		stepSize: ave_p,
-		fontColor: '#678184',
-		callback: function(value, index, values) {
-		return value;
+			tooltips: {
+				mode: 'nearest'
+			},
+			scales: {
+				yAxes: [{
+					id: 'A',
+					type: 'linear',
+					position: 'left',
+					ticks: {
+						min: min_p,
+						max: max_p,
+						stepSize: ave_p,
+						fontColor: '#678184',
+						callback: function(value, index, values) {
+						return value;
+						}
+					}
+				}, 
+				{
+					id: 'D',
+					type: 'linear',
+					position: 'right',
+					ticks: {
+						min: min_m,
+						max: max_m,
+						stepSize: ave_m,
+						fontColor: '#2faebb',
+						callback: function(value, index, values) {
+						return value;
+						}
+					},
+					scaleLabel: {
+						display: false
+					},
+				}]
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				},
+				point: {
+					radius: 4,
+					borderWidth: 2,
+					pointStyle: 'circle'
+				}
+			}
 		}
+		};
+		console.log(chartObj);
+		console.log(config.options.scales.yAxes[0].ticks.max);
+		console.log(config.options.scales.yAxes[1].ticks.max);
+		console.log(config.options.scales.yAxes[0].ticks.min);
+		console.log(config.options.scales.yAxes[1].ticks.min);
+		console.log(config.data.datasets[0].data);
+		console.log(config.data.datasets[1].data);
+		if(chartObj == null){
+			chartObj = new Chart(ctx, config);
+		} else {
+			chartObj.destroy();
+			chartObj = new Chart(ctx, config);
 		}
-		}, {
-		id: 'D',
-		type: 'linear',
-		position: 'right',
-		ticks: {
-		min: min_m,
-		max: max_m,
-		stepSize: ave_m,
-		fontColor: '#2faebb',
-		callback: function(value, index, values) {
-		return value;
-		}
-		},
-		scaleLabel: {
-		display: false
-		},
-		}]
-		},
-		elements: {
-		line: {
-		tension: 0, // disables bezier curves
-		},
-		point: {
-		radius: 4,
-		borderWidth: 2,
-		pointStyle: 'circle'
-		}
-		}
-		}
-		});
+		
 		var submenud = $(".seven-acate-open");
         submenud.css(":visible");
         submenud.slideDown();
@@ -328,9 +333,7 @@
 	}
 	function check_ave(max, min){
 		var ave = 0;
-		
 		ave = (max - min) / 10;
-		
 		return Math.round(ave);
 	}
 	
