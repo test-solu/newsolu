@@ -139,7 +139,6 @@
     }
     var chartObj = null;
     function make_key_Competitiveness(mydata){
-		//console.log(mydata);
 		var my_key = mydata[0];
 		var ctx = document.getElementById('chart').getContext('2d');
 		var label = [];
@@ -256,13 +255,6 @@
 			}
 		}
 		};
-		console.log(chartObj);
-		console.log(config.options.scales.yAxes[0].ticks.max);
-		console.log(config.options.scales.yAxes[1].ticks.max);
-		console.log(config.options.scales.yAxes[0].ticks.min);
-		console.log(config.options.scales.yAxes[1].ticks.min);
-		console.log(config.data.datasets[0].data);
-		console.log(config.data.datasets[1].data);
 		if(chartObj == null){
 			chartObj = new Chart(ctx, config);
 		} else {
