@@ -139,7 +139,8 @@
     }
     var chartObj = null;
     function make_key_Competitiveness(mydata){
-		var my_key = mydata[0];
+		console.log(mydata);
+		var my_key = mydata[mydata.length - 1];
 		var ctx = document.getElementById('chart').getContext('2d');
 		var label = [];
 		var d_pc = [];

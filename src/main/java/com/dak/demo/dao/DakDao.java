@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 @Mapper
 public interface DakDao {
-    public ArrayList<DakDto> getList(String keyword);
+    public ArrayList<DakDto> getList(DakNaverBestDto dnbt);
     public ArrayList<DakNaverBestDto> getCategory();
     public ArrayList<DakNaverBestDto> getNewBest(int seq);
-    public void insert_my_keyword(String keyword);
+    public void insert_my_keyword(DakNaverBestDto dnbt);
 }

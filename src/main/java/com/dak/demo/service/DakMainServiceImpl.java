@@ -32,8 +32,8 @@ public class DakMainServiceImpl implements DakMainService{
     DakDao dao;
 
     @Override
-    public ArrayList<DakDto> getList(String keyword) {
-        return dao.getList(keyword);
+    public ArrayList<DakDto> getList(DakNaverBestDto dnbt) {
+        return dao.getList(dnbt);
     }
 
 	@Override
@@ -111,9 +111,9 @@ public class DakMainServiceImpl implements DakMainService{
 	}
 
 	@Override
-	public void insert_my_keyword(String keyword) {
+	public void insert_my_keyword(DakNaverBestDto dnbt) {
 		logger.info(" [ insert_my_keyword : service ] ");
-		dao.insert_my_keyword(keyword);
+		dao.insert_my_keyword(dnbt);
 	}
 
 	

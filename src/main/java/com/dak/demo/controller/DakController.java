@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +30,6 @@ public class DakController {
 	public ModelAndView hello() throws Exception{
 		ModelAndView mav = new ModelAndView();
 		String address = "dak/test";
-
-		//logger.info("test : " + service.getList());
-		//mav.addObject("nkt_list",service.getList());
-
 		mav.setViewName(address);
 		return mav;
 	}
@@ -135,12 +134,25 @@ public class DakController {
 		logger.info(" [ check_my_keyword ] " + keyword);
 		ArrayList<DakDto> result = new ArrayList<>();
 		Thread th = new Thread();
+		DakNaverBestDto dnbt = new DakNaverBestDto();
+		String sGuid = UUID.randomUUID().toString();
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		String inDate = format.format(time);
 		try {
-			service.insert_my_keyword(keyword);
+			dnbt.setKeyword(keyword);
+			dnbt.setSGuid(sGuid);
+			dnbt.setInDate(inDate);
+			service.insert_my_keyword(dnbt);
 			th.sleep(15000);
-			result = service.getList(keyword);
+			result = service.getList(dnbt);
+			String re = result.get(0).getResult();
+			while(!re.equals("OK")) {
+				result = service.getList(dnbt);
+				re = result.get(0).getResult();
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.error(e.getMessage());
 		}
 		
 		return result;

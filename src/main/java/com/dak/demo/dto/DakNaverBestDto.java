@@ -11,5 +11,7 @@ public class DakNaverBestDto {
 	private int seq;
 	private String categorynm;
 	private String keyword;
+	private String sGuid;
+	private String inDate;
 
 }
