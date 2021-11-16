@@ -13,5 +13,6 @@ public class DakNaverBestDto {
 	private String keyword;
 	private String sGuid;
 	private String inDate;
+	private String WebEmail;
 
 }

@@ -506,7 +506,7 @@
             <div class="sub_content">
                 <div class="container_but">
                     <div class="guide">검색어 인사이트</div>
-                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요" onkeyup="enterkey()"/></div>
+                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요" onkeyup="enterkey(1)"/></div>
                     <div class="button fw four-acate-top" onclick="check_my_keyword()">분석하기</div>
                 </div>
                 <div class="container sec">
@@ -676,8 +676,8 @@
                     
                     <div class="subscribe_inner">
                     <div class="guide">수신 메일 주소</div>
-                    <div class="subscribe_email"><input class="keyword" type="text" name="subscribe" value="" placeholder="메일 주소를 입력하세요"/></div>
-                    <div class="subscribe_but" onclick="test()">구독하기</div>
+                    <div class="subscribe_email"><input class="keyword" type="text" name="subscribe" id="client_email" onkeyup="enterkey(2)" placeholder="메일 주소를 입력하세요"/></div>
+                    <div class="subscribe_but" onclick="saveEmail()">구독하기</div>
                     </div>
                     
                 </div>

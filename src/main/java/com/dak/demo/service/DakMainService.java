@@ -12,4 +12,5 @@ public interface DakMainService {
     public String getExtended(String keyword);
     public String getMyprice(String keyword,String device);
     public void insert_my_keyword(DakNaverBestDto dnbt);
+    public void insert_my_email(DakNaverBestDto dnbt);
 }

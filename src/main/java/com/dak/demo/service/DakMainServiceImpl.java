@@ -116,6 +116,13 @@ public class DakMainServiceImpl implements DakMainService{
 		dao.insert_my_keyword(dnbt);
 	}
 
+	@Override
+	public void insert_my_email(DakNaverBestDto dnbt) {
+		logger.info(" [ insert_my_email : service ] ");
+		dao.insert_my_email(dnbt);
+		
+	}
+
 	
 	
 	

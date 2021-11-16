@@ -17,6 +17,7 @@ public class DakDto {
     private String Result;
     private String ResultMsg;
     private String Resultdate;
+    private String TryCount;
     private int MonthSchCnt_PC;
     private int MonthSchCnt_MO;
     private String MonthAvgClickCnt_PC;

@@ -26,6 +26,11 @@ public class DakController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DakController.class);
 	
+	/**
+	 * 테스트 페이지 호출 
+	 * 아예 삭제 하셔도 됩니다.
+	 * 
+	 */
 	@RequestMapping(value = "/hello")
 	public ModelAndView hello() throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -155,6 +160,21 @@ public class DakController {
 			logger.error(e.getMessage());
 		}
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/insertMyEmail")
+	@ResponseBody
+	public String insertMyEmail(@RequestParam(value = "email")String email) {
+		logger.info(" [ insertMyEmail ] " + email);
+		String result = "구독신청 완료 하였습니다.";
+		DakNaverBestDto dntb = new DakNaverBestDto();
+		dntb.setWebEmail(email);
+		try {
+			service.insert_my_email(dntb);
+		} catch (Exception e) {
+			result = e.getMessage();
+		}
 		return result;
 	}
 	

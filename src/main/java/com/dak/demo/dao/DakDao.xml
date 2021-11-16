@@ -41,6 +41,23 @@
 				)
     </insert>
     
+    <insert id="insert_my_email" parameterType="DakNaverBestDto">
+    	insert
+    	into	CrawlData.dbo.WebEmail
+    			(
+    			WebEmail
+    			,ActiveYN
+    			,indate
+    			,EditDate
+    			)
+    	values	(
+    			#{WebEmail}
+    			,'Y'
+    			,getdate()
+    			,getdate()
+    			)
+    </insert>
+    
 
 
 </mapper>

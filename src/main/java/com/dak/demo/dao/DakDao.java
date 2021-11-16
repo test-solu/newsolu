@@ -11,4 +11,5 @@ public interface DakDao {
     public ArrayList<DakNaverBestDto> getCategory();
     public ArrayList<DakNaverBestDto> getNewBest(int seq);
     public void insert_my_keyword(DakNaverBestDto dnbt);
+    public void insert_my_email(DakNaverBestDto dnbt);
 }

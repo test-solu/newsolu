@@ -51,14 +51,18 @@
     	});
 	}
 	
-	function enterkey(){
+	function enterkey(seq){
 		var mk = $("#check_mk").val();
 		if(window.event.keyCode == 13){
-			if(mk.length == 0) {
-				alert("검색어를 입력하세요");
-				return;
-			} else {
-				check_my_keyword();
+			if(seq == 1){
+				if(mk.length == 0) {
+					alert("검색어를 입력하세요");
+					return;
+				} else {
+					check_my_keyword();
+				}
+			} else if(seq == 2){
+				saveEmail();
 			}
 		}
 	}
@@ -323,9 +327,31 @@
         }
 		return max;
 	}
+	
 	function check_ave(max, min){
 		var ave = 0;
 		ave = (max - min) / 10;
 		return Math.round(ave);
 	}
 	
+	function saveEmail(){
+		var cemail = $("#client_email").val();
+		var regExp = /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm;
+		if(!regExp.test(cemail)){
+			alert("이메일 형식에 맞게 입력 바랍니다.");
+			return;
+		}
+		
+		$.ajax({
+    		type		:	"GET",
+    		url			:	"/insertMyEmail",
+    		data		:	{email:cemail},
+    		dataType	:	"text",
+    		success		:	function(data){
+				$("#client_email").val("");
+				alert(data);
+    		},error		:	function(e){
+    			alert(e.statusText);
+    		}
+    	});
+	}
