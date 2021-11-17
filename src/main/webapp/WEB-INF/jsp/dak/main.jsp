@@ -359,56 +359,7 @@
                         <h5>확장키워드</h5>
                         <button id="ath" class="cate-but"></button>
                         <ul id="showHideth" class="click sub-open-tw sec-acate-open">
-                           <!--  <li>	블라우스	</li>
-                            <li>	검정블라우스	</li>
-                            <li>	남색블라우스	</li>
-                            <li>	레드블라우스	</li>
-                            <li>	레이스블라우스	</li>
-                            <li>	로엠블라우스	</li>
-                            <li>	루즈핏린넨블라우스	</li>
-                            <li>	린넨셔츠자켓	</li>
-                            <li>	베네통체크	</li>
-                            <li>	보라색블라우스	</li>
-                            <li>	블라우스셔츠	</li>
-                            <li>	블라우스쇼핑몰	</li>
-                            <li>	블랙블라우스	</li>
-                            <li>	블루블라우스	</li>
-                            <li>	빅카라블라우스	</li>
-                            <li>	셔링블라우스	</li>
-                            <li>	쉬폰블라우스	</li>
-                            <li>	써스데이아일랜드데님	</li>
-                            <li>	써스데이아일랜드블라우스	</li>
-                            <li>	여름블라우스	</li>
-                            <li>	여성남방	</li>
-                            <li>	여성반팔블라우스	</li>
-                            <li>	여성블라우스	</li>
-                            <li>	여성상의	</li>
-                            <li>	여성오피스룩	</li>
-                            <li>	여성티블라우스	</li>
-                            <li>	연말블라우스	</li>
-                            <li>	옐로우블라우스	</li>
-                            <li>	오렌지블라우스	</li>
-                            <li>	온앤온	</li>
-                            <li>	자수블라우스	</li>
-                            <li>	자켓블라우스	</li>
-                            <li>	지컷블라우스	</li>
-                            <li>	초록블라우스	</li>
-                            <li>	케네스레이디블라우스	</li>
-                            <li>	퍼플블라우스	</li>
-                            <li id="bth" class="on third-acate-top">	프릴블라우스	</li>
-                            <li>	화이트블라우스	</li>
-                            <li>	흰블라우스	</li>
-                            <li>	분홍블라우스	</li>
-                            <li>	녹색블라우스	</li>
-                            <li>	가을블라우스	</li>
-                            <li>	지이크블라우스	</li>
-                            <li>	soup블라우스	</li>
-                            <li>	베스띠벨리블라우스	</li>
-                            <li>	SI블라우스	</li>
-                            <li>	랩블라우스	</li>
-                            <li>	헤지스블라우스	</li>
-                            <li>	버버리블라우스	</li>
-                            <li>	더틸버리블라우스	</li>  -->                                                         
+                                                                        
                         </ul>
                     </div>
                     <div class="sub_inner per30">
@@ -506,7 +457,7 @@
             <div class="sub_content">
                 <div class="container_but">
                     <div class="guide">검색어 인사이트</div>
-                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요" onkeyup="enterkey(1)"/></div>
+                    <div class="speech_balloon"><input class="keyword" id="check_mk" type="text" name="search" maxlength="25" placeholder="검색어를 입력하세요" onkeyup="enterkey()"/></div>
                     <div class="button fw four-acate-top" onclick="check_my_keyword()">분석하기</div>
                 </div>
                 <div class="container sec">
@@ -637,8 +588,9 @@
                         <div class="sub_inner flex">
                             <h5>최근 6개월 키워드 검색량</h5>
 
-                            <div class="sub-open-fo seven-acate-open" style="width:100%;">
-                                <canvas id="chart" height="250"></canvas>
+                            <div class="sub-open-fo seven-acate-open" id="seven_chart" style="width:100%;">
+                            <img id="15simg" src="resources/img/loading_alpha.png"/>
+                                <canvas id='chart' height='250' ></canvas>
                                 </div>
                              
                         </div>
@@ -676,7 +628,7 @@
                     
                     <div class="subscribe_inner">
                     <div class="guide">수신 메일 주소</div>
-                    <div class="subscribe_email"><input class="keyword" type="text" name="subscribe" id="client_email" onkeyup="enterkey(2)" placeholder="메일 주소를 입력하세요"/></div>
+                    <div class="subscribe_email"><input class="keyword" type="text" name="subscribe" id="client_email" onkeyup="enterkey_email()" placeholder="메일 주소를 입력하세요"/></div>
                     <div class="subscribe_but" onclick="saveEmail()">구독하기</div>
                     </div>
                     

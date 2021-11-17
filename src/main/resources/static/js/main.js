@@ -1,13 +1,17 @@
 		
 	var check_first = 0;
 	function getSixmonth(mk){
+		$("#15simg").show();
+		$("#chart").hide();
 		$.ajax({
     		type		:	"GET",
     		url			:	"/check_my_keyword",
     		data		:	{keyword:mk},
     		dataType	:	"json",
     		success		:	function(data){
+				$("#15simg").hide();
 				make_key_Competitiveness(data);
+				$("#chart").show();
     		},error		:	function(e){
     			alert(e.statusText);
     		}
@@ -51,18 +55,14 @@
     	});
 	}
 	
-	function enterkey(seq){
+	function enterkey(){
 		var mk = $("#check_mk").val();
 		if(window.event.keyCode == 13){
-			if(seq == 1){
-				if(mk.length == 0) {
-					alert("검색어를 입력하세요");
-					return;
-				} else {
-					check_my_keyword();
-				}
-			} else if(seq == 2){
-				saveEmail();
+			if(mk.length == 0) {
+				alert("검색어를 입력하세요");
+				return;
+			} else {
+				check_my_keyword();
 			}
 		}
 	}
@@ -138,6 +138,10 @@
         submenuf.css(":visible");
         submenuf.slideDown();
         var submenud = $(".six-acate-open");
+        submenud.css(":visible");
+        submenud.slideDown();
+        
+        var submenud = $(".seven-acate-open");
         submenud.css(":visible");
         submenud.slideDown();
     }
@@ -266,9 +270,9 @@
 			chartObj = new Chart(ctx, config);
 		}
 		
-		var submenud = $(".seven-acate-open");
+		/*var submenud = $(".seven-acate-open");
         submenud.css(":visible");
-        submenud.slideDown();
+        submenud.slideDown();*/
 	}
 	
 	function check_min(myprice){
@@ -333,10 +337,26 @@
 		ave = (max - min) / 10;
 		return Math.round(ave);
 	}
+	function enterkey_email(){
+		var cemail = $("#client_email").val();
+		if(window.event.keyCode == 13){
+			if(cemail.length == 0) {
+				alert("이메일을 입력하세요");
+				return;
+			} else {
+				saveEmail();
+			}
+		}
+	}
 	
 	function saveEmail(){
 		var cemail = $("#client_email").val();
 		var regExp = /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm;
+		if(cemail.length == 0) {
+			alert("이메일을 입력하세요");
+			return;
+		}
+		
 		if(!regExp.test(cemail)){
 			alert("이메일 형식에 맞게 입력 바랍니다.");
 			return;
