@@ -153,15 +153,12 @@ public class DakController {
 			result = service.getList(dnbt);
 			String re = result.get(0).getResult();
 			int r_call = 0;
-			if(re.equals(null)) {
-			}
 			while(!re.equals("OK")) {
-				if (r_call > 6) continue;
+				if (r_call > 6) break;
 				th.sleep(5000);
 				result = service.getList(dnbt);
-				r_call ++;
 				re = result.get(0).getResult();
-				logger.info(" [ check call ] " + r_call);
+				r_call ++;
 			}
 		} catch (Exception e) {
 			logger.error("error : " + e.getMessage());
