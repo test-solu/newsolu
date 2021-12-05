@@ -33,6 +33,7 @@ public class DakMainServiceImpl implements DakMainService{
 
     @Override
     public ArrayList<DakDto> getList(DakNaverBestDto dnbt) {
+    	logger.info(" [ getCategory : getList ] ");
         return dao.getList(dnbt);
     }
 
