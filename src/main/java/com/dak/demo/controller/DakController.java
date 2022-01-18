@@ -45,7 +45,7 @@ public class DakController {
 	 * jeff
 	 * 기능 설명 : 메일페이지 호출(첫 li 카테고리 호출)
 	 */
-	@RequestMapping(value = "/main")
+	@RequestMapping(value = "/")
 	public ModelAndView main(){
 		logger.info(" [ main ] ");
 		ModelAndView mav = new ModelAndView();
